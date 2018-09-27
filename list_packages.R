@@ -1,0 +1,6 @@
+install.packages("devtools")
+#devtools::install_github("rstudio/rmarkdown")
+install.packages( "rmarkdown" ) 
+install.packages("caTools")
+install.packages("tibble")
+install.packages("ggplot2")
