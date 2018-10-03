@@ -9,22 +9,56 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## Exercise 1
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+Il faut éviter de mettre des binary files volumineux sur github. A chaque fois qu'on en met, ils se reupload entièrement et avec l'historique, on augmente l'espace utilisé par la taille du fichier.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+## Exercise 2
 
-```{r cars}
-summary(cars)
+
+```{r }
+possible_outcomes <- c(0, 1, 2, 3, 4, 5)
+outcome_probabilities <- c(0.1, 0.5, 0.2, 0.1, 0.05, 0.05)
+n_data_points <- 400
+set.seed(1)
+fake_data_points <- sample(possible_outcomes,
+n_data_points,
+replace=T,
+prob=outcome_probabilities)
+set.seed(NULL)
+fake_data_set <- tibble::data_frame(`Fake measurement`=fake_data_points)
 ```
 
-## Including Plots
+Statement 2 : Cette ligne assigne à la variable outcome_probabilities un vecteur, donc chacun des nombres représenteraient la probabilité de l'outcome de possible_outcomes.
+ 
+ - On a une assignation de variable avec <-
+ 
+ - Il s'agit d'un vecteur car on a des nombres  dans c(...) séparés par des virgules
+ 
+ - La probabilité (car compris entre 0 et 1) de l'outcome correspondant car on a deux vecteurs de même taille - donc avec une correspondance d'indice ; le nom de la variable penche aussi pour ça.
 
-You can also embed plots, for example:
+Statement 3 : Cette ligne assigne à la variable n_data_point un entier. Celui-ci va correspondre au nombre d'individu qu'on va étudier.
+ 
+ - On a une assignation de variable avec <-
+ 
+ - Le nom est explicite.
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+Statement 4 : Cette ligne appelle la fonction set.seed(nombre). Celle permet de "fixer" l'aléatoire, c'est-à-dire d'obtenir les mêmes résultats à chaque fois que l'on fait tourner le code avec les mêmes paramètres, afin de pouvoir comparer les résultats d'une fois à l'autre. C'est fixé en fonction de l'entier passé en paramètre.
+ 
+ - On a un appel de fonction avec seed() qui nous ai indiqué par les parenthèses. Généralement, lorsqu'on quelque chose comme set.seed(), set est un objet et seed une méthode ; mais pour le cas de R, je ne suis pas sûre de si  il s'agit d'une fonction ou d'une méthode car je n'ai pas vu l'initialisation de l'objet set et dans la documentation j'ai cru voir "set.seed function". L'entier 1 est passé en paramètre de la méthode/fonction.
+
+Statement 5 : On a une assignation de variable fake_data_points à partir de ce que retourne la fonction sample. Certainement une série de nombre entre 0 et 5 (nos possibles outcomes).
+
+ - On passe à la fonction sample des arguments : les possibles outcomes parmi lesquels elle va piocher. Le n_data_points étant le nombre de fois ou elle va piocher (donc la longueur de fake_data_points). Le paramètre replace est reglé sur la valeur True : un même élément peut donc apparaître plusieurs fois (ou ne pas apparaître du tout). Prob est reglé grâce à outcome_probabilities - et va donc servir à définir la probabilité d'apparition d'un élément.
+
+Statement 6 : On a une assignation de variable fake_data_set à partir de ce que retourne la fonction data_frame de la librairie tibble. On met nos données fake_data_points dans un tableau dont la colonne sera Fake measurement.
+ - Si on print le typeof() de fake_data_points et celui de fake_data_set, on voit qu'on passe de double à list.
+ - L'assignation est avec <-, ce qui se trouve avant :: réfère à une librairie (ici tibble), et data_frame est une fonction puisque suivie de () avec des arguments dedans.
+
+ 
+```{r }
+ggplot2::ggplot(fake_data_set, ggplot2::aes(x=`Fake measurement`)) +
+ggplot2::geom_histogram(bins=5, colour="black", fill="lightgrey")
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
