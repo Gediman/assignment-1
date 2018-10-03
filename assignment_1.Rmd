@@ -8,6 +8,10 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+```{r}
+source("functions.R")
+```
+
 
 ## Exercise 1
 
@@ -60,5 +64,34 @@ Statement 6 : On a une assignation de variable fake_data_set à partir de ce que
 ggplot2::ggplot(fake_data_set, ggplot2::aes(x=`Fake measurement`)) +
 ggplot2::geom_histogram(bins=5, colour="black", fill="lightgrey")
 ```
+## Exercise 
 
+#Sub-exercise 3-a
+```{r}
+print(sum_column(iris, "Sepal.Length"))
+print(sum_column(iris, "Species"))
+print(sum_column(warpbreaks, "breaks"))
+```
+
+#Sub-exercise 3-b
+```{r}
+print(my_sum(iris$Sepal.Length))
+print(my_sum(iris$Species))
+print(my_sum(warpbreaks$breaks))
+```
+
+#Sub-exercise 3-c
+```{r}
+print(sum_divided_by(iris$Sepal.Length, 12))
+print(sum_divided_by(iris$Species, 22))
+print(sum_divided_by(iris$Sepal.Length, "Not numeric"))
+print(sum_divided_by(warpbreaks$breaks, -12))
+```
+
+#Sub-exercise 3-d
+```{r}
+print(my_mean(iris$Sepal.Length))
+print(my_mean(iris$Species))
+print(my_mean(warpbreaks$breaks))
+```
 
