@@ -113,3 +113,79 @@ p <- p+ggplot2::ggtitle("Iris data")
 print(p)
 ```
 
+##Exercise 5
+
+#Sub- exercise 5-a
+```{r}
+difference_in_medians(iris, "Sepal.Width", "Species", "versicolor", "virginica")
+difference_in_medians(iris, "Sepal.Width", "Species", "virginica", "virginica")
+```
+
+#Sub-exercise 5-b
+```{r}
+iris$Sepal.Width[1:10]
+if(!exists(".Random.seed")) set.seed(NULL)
+previous_seed <- .Random.seed
+set.seed(1)
+randomize(iris, "Sepal.Width")$Sepal.Width[1:10]
+randomize(iris, "Species")$Species[1:10]
+randomize(iris, "Species")$Sepal.Width[1:10]
+set.seed(previous_seed)
+```
+
+#Sub-exercise 5-c
+```{r}
+if(!exists(".Random.seed")) set.seed(NULL)
+previous_seed <- .Random.seed
+set.seed(1)
+ptest_1 <- permutation_twogroups(iris, "Sepal.Width", "Species", "versicolor",
+"virginica", difference_in_medians, n_samples=10)
+ptest_2 <- permutation_twogroups(iris, "Sepal.Width", "Species", "versicolor",
+"virginica", difference_in_medians, n_samples=10)
+ptest_3 <- permutation_twogroups(randomize(iris, "Sepal.Width"), "Sepal.Width",
+"Species", "versicolor", "virginica",
+difference_in_medians, n_samples=10)
+set.seed(previous_seed)
+print(ptest_1)
+print(ptest_2)
+print(ptest_3)
+print(ptest_3$observed)
+print(ptest_3[["observed"]])
+```
+
+#Sub-exercise 5-d
+
+Il ne revient en effet pas à la même chose de permuter var ou grouping var. La clef de permutation n'est alors pas la même, donnant des vecteurs différents - avec la même seed de random. Pourtant on obtient la même mesure "observed".
+
+```{r}
+if(!exists(".Random.seed")) set.seed(NULL)
+previous_seed <- .Random.seed
+set.seed(1)
+ptest_1 <- permutation_grouping(iris, "Sepal.Width", "Species", "versicolor",
+"virginica", difference_in_medians, n_samples=10)
+ptest_2 <- permutation_grouping(iris, "Sepal.Width", "Species", "versicolor",
+"virginica", difference_in_medians, n_samples=10)
+ptest_3 <- permutation_grouping(randomize(iris, "Sepal.Width"), "Sepal.Width",
+"Species", "versicolor", "virginica",
+difference_in_medians, n_samples=10)
+set.seed(previous_seed)
+print(ptest_1)
+print(ptest_2)
+print(ptest_3)
+print(ptest_3$observed)
+print(ptest_3[["observed"]])
+```
+
+#Sub-exercise 5-e
+
+```{r cache=T}
+if(!exists(".Random.seed")) set.seed(NULL)
+previous_seed <- .Random.seed
+set.seed(1)
+ptest <- permutation_twogroups(iris, "Sepal.Width", "Species", "versicolor",
+"virginica", difference_in_medians)
+set.seed(previous_seed)
+```
+
+
+
