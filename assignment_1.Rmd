@@ -198,7 +198,7 @@ p <- ggplot2::ggplot(ptest_d, ggplot2::aes(x=permuted)) + ggplot2::geom_histogra
 
 print(p)
 ```
-
+D'après l'histrogamme, si la largeur des pétales semble assez bien repartie autour de 0 (ce qui est étrange pour une largeur de sépales, d'avoir des valeurs négatives), on peut voir que la médiane des valeurs non permutés se trouvent à -0.2, ce qui ne correspond pas vraiment à l'endroit où les valeurs se concentrent.
 
 
 
