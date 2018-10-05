@@ -25,8 +25,6 @@ sum_column <- function(d, var) {
     if(is.numeric(x)){
       result <- sum(x)
     }
-      #print(typeof(number))
-      #print(number)
   }
     # You will need to do a bit of research in order to figure out how
     # to test whether a vector contains numbers.
@@ -127,3 +125,33 @@ my_mean <- function(x) {
   #Les éventuels cas limites sont gérés par les fonctions en amont.
   return(sum_divided_by(x, length(x)))
 }
+
+# Return a violin plot.
+#
+# ARGUMENTS:
+# d: a data frame or tibble
+# var: the name of a column of d containing the dependent variable, provided as a
+# string
+# grouping_var: the name of a column of d containing a grouping variable,
+# provided as a string
+#
+# RETURN VALUE:
+# A ggplot plot object containing a violin plot, grouped by the values
+# of the grouping variable.
+#
+grouped_violin_plot <- function(d, var, grouping_var) {
+  # Create the base ggplot object
+  p <- ggplot2::ggplot(d, ggplot2::aes_string(y=var,
+                                              x=grouping_var,
+                                              fill=grouping_var))
+  # YOUR CODE HERE: Create a violin plot
+  p <- p + ggplot2::geom_violin()
+  return(p)
+}
+
+
+
+
+
+
+

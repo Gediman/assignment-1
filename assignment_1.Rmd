@@ -64,7 +64,7 @@ Statement 6 : On a une assignation de variable fake_data_set à partir de ce que
 ggplot2::ggplot(fake_data_set, ggplot2::aes(x=`Fake measurement`)) +
 ggplot2::geom_histogram(bins=5, colour="black", fill="lightgrey")
 ```
-## Exercise 
+## Exercise 3
 
 #Sub-exercise 3-a
 ```{r}
@@ -93,5 +93,23 @@ print(sum_divided_by(warpbreaks$breaks, -12))
 print(my_mean(iris$Sepal.Length))
 print(my_mean(iris$Species))
 print(my_mean(warpbreaks$breaks))
+```
+
+## Exercise 4
+
+#Sub-exercise 4-a
+```{r}
+print(grouped_violin_plot(iris, "Sepal.Length", "Species"))
+```
+
+#Sub-exercise 4-b
+```{r}
+p <- grouped_violin_plot(iris, "Sepal.Length", "Species")
+# YOUR CODE HERE: Change the colour scheme for the interior of the three violin plots
+# to anything else at all.
+p <- p+ggplot2::scale_fill_brewer(palette="YlOrRd")
+# YOUR CODE HERE: Add a main title that says "Iris data".
+p <- p+ggplot2::ggtitle("Iris data")
+print(p)
 ```
 
