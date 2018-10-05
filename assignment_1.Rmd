@@ -187,5 +187,18 @@ ptest <- permutation_twogroups(iris, "Sepal.Width", "Species", "versicolor",
 set.seed(previous_seed)
 ```
 
+```{r}
+ptest_d <- tibble::as_tibble(ptest["permuted"])
+# YOUR CODE HERE: plot a histogram with a vertical line at the observed valu
+#print(ptest)
+ptest_d <- tibble::as_tibble(ptest["permuted"])
+
+p <- ggplot2::ggplot(ptest_d, ggplot2::aes(x=permuted)) + ggplot2::geom_histogram(binwidth=.05, col="blue", 
+                 fill="grey") + ggplot2::labs(title="Histogram of observed value and permuted values", x="permuted values", y="count") + ggplot2::geom_vline(ggplot2::aes(xintercept=unlist(ptest["observed"])))
+
+print(p)
+```
+
+
 
 
